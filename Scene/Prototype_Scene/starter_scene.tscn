@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://byew7wk8aw2qh" path="res://Features/Player/Player.tscn" id="1_hrck2"]
 [ext_resource type="Script" uid="uid://dhutyapvfsq1n" path="res://Features/Obstacles/obstacles_manager.gd" id="1_o3ksw"]
 [ext_resource type="Script" uid="uid://bouifvglww5dd" path="res://Features/Obstacles/obstacle_data.gd" id="2_e06gl"]
+[ext_resource type="Script" uid="uid://df5k0273px3qu" path="res://UI/guiding.gd" id="2_h0cjx"]
 [ext_resource type="PackedScene" uid="uid://7e1njrd8kpv" path="res://Features/HolePit/hole_pit.tscn" id="2_qkpqy"]
 [ext_resource type="PackedScene" uid="uid://brxbv6selcv15" path="res://Features/Lava/lava.tscn" id="3_b65ur"]
 [ext_resource type="Resource" uid="uid://cmrpgy4qkibn4" path="res://Features/Obstacles/obs1_data.tres" id="3_u0rui"]
@@ -22,6 +23,20 @@
 [ext_resource type="PackedScene" uid="uid://cbelu7m0udgvy" path="res://Features/Lava/lava_burst.tscn" id="15_hvv1g"]
 [ext_resource type="Script" uid="uid://bagmkpibyxlih" path="res://Features/Player/power_up_spawner.gd" id="16_k3ing"]
 [ext_resource type="PackedScene" uid="uid://cnc4xeqg22ikv" path="res://Features/PowerUps/random_powerup.tscn" id="16_w63vo"]
+[ext_resource type="Theme" uid="uid://djdfumrmhfg6d" path="res://UI/default_theme.tres" id="23_yykhs"]
+[ext_resource type="Texture2D" uid="uid://gsdc7j7or8a3" path="res://UI/keyboard.png" id="24_h0cjx"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pgcmi"]
+atlas = ExtResource("24_h0cjx")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yykhs"]
+atlas = ExtResource("24_h0cjx")
+region = Rect2(0, 48, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a0enm"]
+atlas = ExtResource("24_h0cjx")
+region = Rect2(128, 128, 16, 16)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_o3ksw"]
 texture = ExtResource("4_d8lkn")
@@ -42,11 +57,130 @@ tile_size = Vector2i(32, 32)
 sources/0 = SubResource("TileSetAtlasSource_o3ksw")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_d8lkn"]
-size = Vector2(128, 64)
+size = Vector2(128, 59)
 
 [node name="StarterScene" type="Node2D" unique_id=1494257243]
 
 [node name="GameSceneBundle" parent="." unique_id=2049666629 instance=ExtResource("1_e06gl")]
+
+[node name="Guiding" type="Control" parent="." unique_id=1070347164]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -48.0
+offset_top = -188.0
+offset_right = -48.0
+offset_bottom = -188.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_h0cjx")
+
+[node name="Panel" type="Panel" parent="Guiding" unique_id=1290689876]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 19.000002
+offset_top = 76.00001
+offset_right = 19.000002
+offset_bottom = 76.00001
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.7, 0.7)
+mouse_filter = 2
+theme = ExtResource("23_yykhs")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Guiding/Panel" unique_id=772954547]
+layout_mode = 0
+offset_right = 97.0
+offset_bottom = 101.0
+theme_override_constants/separation = 25
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Guiding/Panel/VBoxContainer" unique_id=828749476]
+layout_mode = 2
+
+[node name="BoxContainer" type="BoxContainer" parent="Guiding/Panel/VBoxContainer/HBoxContainer" unique_id=1280722578]
+layout_mode = 2
+alignment = 1
+vertical = true
+
+[node name="TextureRect" type="TextureRect" parent="Guiding/Panel/VBoxContainer/HBoxContainer/BoxContainer" unique_id=919308967]
+self_modulate = Color(0.72156864, 0.48235294, 0.33333334, 1)
+layout_mode = 2
+texture = SubResource("AtlasTexture_pgcmi")
+expand_mode = 4
+flip_h = true
+
+[node name="RestartLabel" type="Label" parent="Guiding/Panel/VBoxContainer/HBoxContainer/BoxContainer" unique_id=1512796774]
+layout_mode = 2
+theme_override_constants/line_spacing = -5
+theme_override_font_sizes/font_size = 16
+text = "  Kiri  "
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BoxContainer2" type="BoxContainer" parent="Guiding/Panel/VBoxContainer/HBoxContainer" unique_id=1890634017]
+layout_mode = 2
+alignment = 1
+vertical = true
+
+[node name="TextureRect" type="TextureRect" parent="Guiding/Panel/VBoxContainer/HBoxContainer/BoxContainer2" unique_id=1058099070]
+self_modulate = Color(0.72156864, 0.48235294, 0.33333334, 1)
+layout_mode = 2
+texture = SubResource("AtlasTexture_yykhs")
+expand_mode = 4
+
+[node name="RestartLabel" type="Label" parent="Guiding/Panel/VBoxContainer/HBoxContainer/BoxContainer2" unique_id=1024753534]
+layout_mode = 2
+theme_override_constants/line_spacing = -5
+theme_override_font_sizes/font_size = 16
+text = "Kanan"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BoxContainer4" type="Control" parent="Guiding/Panel/VBoxContainer" unique_id=2121074778]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="TextureRect" type="TextureRect" parent="Guiding/Panel/VBoxContainer/BoxContainer4" unique_id=96208938]
+self_modulate = Color(0.72156864, 0.48235294, 0.33333334, 1)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -25.142857
+offset_top = -22.85716
+offset_right = 137.85715
+offset_bottom = 140.14284
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.24, 0.24)
+size_flags_vertical = 0
+texture = SubResource("AtlasTexture_a0enm")
+expand_mode = 4
+
+[node name="RestartLabel" type="Label" parent="Guiding/Panel/VBoxContainer/BoxContainer4" unique_id=177380777]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -78.0
+offset_top = 23.0
+offset_right = 85.0
+offset_bottom = 45.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/line_spacing = -5
+theme_override_font_sizes/font_size = 16
+text = "Tekan Berkala Untuk Naik"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="ObstaclesManager" type="Node2D" parent="." unique_id=814958256]
 script = ExtResource("1_o3ksw")
@@ -86,18 +220,17 @@ collision_mask = 6
 [node name="AreaOut" parent="HolePit" index="4" unique_id=2090016401]
 collision_mask = 6
 
-[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1850152302]
+[node name="Platform" type="StaticBody2D" parent="." unique_id=1850152302]
 z_index = -1
 
-[node name="Start" type="TileMapLayer" parent="StaticBody2D" unique_id=1385723556]
+[node name="Start" type="TileMapLayer" parent="Platform" unique_id=1385723556]
 tile_map_data = PackedByteArray("AAAAAAEAAAACAAIAAAD//wEAAAACAAIAAAD+/wEAAAAAAAIAAAABAAEAAAAEAAIAAAD+/wIAAAAAAAYAAAABAAIAAAAEAAYAAAAAAAIAAAAEAAQAAFD//wIAAAAEAAQAAFA=")
 tile_set = SubResource("TileSet_vuu0q")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=743022217]
-position = Vector2(0, 64)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Platform" unique_id=743022217]
+position = Vector2(0, 66.5)
 shape = SubResource("RectangleShape2D_d8lkn")
 
-[connection signal="body_entered" from="Lava" to="Player" method="_on_lava_body_entered"]
 [connection signal="area_entered" from="HolePit/AreaOut" to="HolePit" method="_on_area_out_area_entered"]
 
 [editable path="Lava"]
